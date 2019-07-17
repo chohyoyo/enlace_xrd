@@ -35,7 +35,7 @@ ax.set_xticks(x)
 ax.set_xticklabels(x)
 ax.legend()
 
-plt.show()
+plt.savefig('slothost.png')
 
 #plot urls using output files
 urllist = pout.collecturl(runDir)
@@ -51,7 +51,7 @@ plt.barh(url_index, values, width)
 plt.ylabel('URL')
 plt.xlabel('frequency')
 plt.yticks(url_index)
-plt.show()
+plt.savefig('URLfreq.png')
 
 #plot rates using output files
 ratedict = pout.collectrates(runDir)
@@ -66,5 +66,4 @@ plt.ylabel('Job')
 plt.xlabel('Rate [MB/s]')
 plt.yticks(job_index)
 plt.title("Average Rate per Job. Average of run was " + avg_all + "MB/s")
-plt.show()
-
+plt.savefig('rates.png')
