@@ -1,7 +1,7 @@
+#!/usr/bin/env python
 
 import os
 import sys
-import matplotlib
 import matplotlib.pyplot as plt
 import conlog_parse as cp
 import parse_out as pout
@@ -66,6 +66,3 @@ plt.xlabel('Rate [MB/s]')
 plt.yticks(job_index)
 plt.show()
 
-
-
-#%%
