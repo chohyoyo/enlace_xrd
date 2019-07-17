@@ -57,6 +57,7 @@ plt.show()
 ratedict = pout.collectrates(runDir)
 labels = list(ratedict.keys())
 rates = list(ratedict.values())
+avg_all = str(round(pout.avgrate_everything(runDir),1))
 
 job_index = np.arange(0,len(rates),1)
 
@@ -64,5 +65,6 @@ plt.barh(job_index,rates,width)
 plt.ylabel('Job')
 plt.xlabel('Rate [MB/s]')
 plt.yticks(job_index)
+plt.title("Average Rate per Job. Average of run was " + avg_all + "MB/s")
 plt.show()
 
