@@ -67,6 +67,7 @@ def parse_out(outfile):
     fl_handle.close()
 
     if fl_data == []:
+        print("Error: Empty file: " + outfile)
         retval['url']="None"
         retval['avgrate']=0
     else:
@@ -92,4 +93,16 @@ def collectrates(dir):
         singlerate = parse_out(path)['avgrate']
         retval.update({path:singlerate})
     return retval
+
+def avgrate_everything(rundir):
+    paths = collect_out(rundir)
+    rates = []
+    for path in paths:
+        rate = parse_out(path)['avgrate']
+        if not rate == 0:
+            rates.append(rate)
+        else:
+            print("Removed data point")
+    avg = sum(rates)/len(rates)
+    return avg
 
