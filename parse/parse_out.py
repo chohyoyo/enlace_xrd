@@ -43,7 +43,15 @@ def calcrate(lines,size):
         if "Sleeping" in line:
             slptime = float(line.split()[2])
             time = 10 - slptime
+            if time <= 0:
+                time = 0.01
+                print("Error: slept for 10 seconds or more")
+                print(line)
             rate = size/time #MB/s
+            rates.append(rate)
+        if "Not Sleeping" in line:
+            time = 10 + float(line.split()[5])
+            rate = size/time
             rates.append(rate)
         else:
             pass

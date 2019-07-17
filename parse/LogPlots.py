@@ -1,3 +1,4 @@
+
 import os
 import sys
 import matplotlib
@@ -8,10 +9,10 @@ import numpy as np
 from collections import Counter
 
 runDir = sys.argv[1]
-logPath = cp.find_conlog(runDir)
+logfile = cp.find_conlog(runDir)
 
 #plot hosts from conlog
-parseddata = cp.parse_job_data(logPath)
+parseddata = cp.parse_job_data(logfile)
 procdata = cp.data_rows_by_proc(parseddata)
 slothosts = cp.slothosts_to_eviction_counts(procdata)
 
@@ -65,3 +66,6 @@ plt.xlabel('Rate [MB/s]')
 plt.yticks(job_index)
 plt.show()
 
+
+
+#%%

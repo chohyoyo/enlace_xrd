@@ -3,6 +3,7 @@ import os
 import sys
 
 def find_conlog(rundir):
+    log_path = ""
     for root, dirs, files in os.walk(rundir): 
         for file in files:
             if file.startswith("con_"):
