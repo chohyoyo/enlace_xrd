@@ -2,16 +2,6 @@
 import os
 import sys
 
-def find_conlog(rundir):
-    log_path = ""
-    for root, dirs, files in os.walk(rundir): 
-        for file in files:
-            if file.startswith("con_"):
-                log_path = os.path.join(root,file)
-            else:
-                pass
-    return log_path
-
 def parse_job_data(filename):
     retval = []
     fl_handle = open(filename, 'r')

@@ -1,6 +1,9 @@
 #%%
 #!/usr/bin/env python
 
+#This script makes four plots (Host/Eviction frequency per slot, File URL frequency, Instantaneous Rate, Total Rate) for a SINGLE concurrency
+#Sample use: python3 ./LogPlots.py ./run_20190717_175123
+
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -9,7 +12,7 @@ import parse_out as pout
 import numpy as np
 from collections import Counter
 
-runDir = sys.argv[1]
+runDir = sys.argv[1] #the directory of the run we want to generate plots for
 logfile = cp.find_conlog(runDir)
 
 #plot hosts from conlog
@@ -20,10 +23,10 @@ slothosts = cp.slothosts_to_eviction_counts(procdata)
 width = 0.35
 
 all_host_data = list(slothosts.values())
-rel_host_data = all_host_data[1:]
+rel_host_data = all_host_data[1:] #removes the data for the ones that are under GLIDEIN_Entry_Name:Unknown
 ylen = len(rel_host_data)
 
-unk_host = all_host_data[0]
+unk_host = all_host_data[0] #list with the number of jobs hosted[0] and evicted[1] with an unknown host
 hosted_unk = str(unk_host[0])
 evicted_unk = str(unk_host[1])
 
@@ -48,7 +51,7 @@ plt.savefig('slothosts.png')
 urllist = pout.collecturl(runDir)
 
 counts = Counter(urllist)
-no_file_count = str(counts.pop("none",None))
+no_file_count = str(counts.pop("none",None)) #removes the unsuccessful counts since they have a url listed as 'none'
 
 labels, values = zip(*counts.items())
 
@@ -62,7 +65,7 @@ ax2.set_xticks(url_index)
 ax2.set_xticklabels('URL')
 ax2.set_ylabel('frequency')
 ax2.set_title('File URL frequency\n' + no_file_count + " jobs with no file used.")
-ax2.tick_params(labelleft = False)
+ax2.tick_params(labelbottom = False)
 
 plt.savefig('URLfreq.png')
 
@@ -81,10 +84,11 @@ ax3.set_xlabel('Job')
 ax3.set_ylabel('Rate [MB/s]')
 ax3.set_xticks(job_index)
 ax3.set_title("Average Rate per Job. Average of run was " + avg_all + "MB/s")
-ax3.tick_params(labelleft = False)
+ax3.tick_params(labelbottom = False)
 
-plt.savefig('rates.png')
+plt.savefig('inst_rates.png')
 
+#plots rate from total size and total time
 fig4, ax4 = plt.subplots(figsize = (15,4))
 
 total_rates = pout.collect_total_rates(runDir)
@@ -103,4 +107,7 @@ ax4.set_xticks(rate_index)
 ax4.set_title("Rates from total size and total time\n" + "average of all jobs is " + avg_tot_rate + "MB/s")
 ax4.tick_params(labelbottom = False)
 
-plt.savefig('totalrates.png')
+plt.savefig('total_rates.png')
+
+
+#%%
