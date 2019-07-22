@@ -33,7 +33,7 @@ def xrdfragcp_args(rows): #input must be a list with lines from the output file
         else:
             pass
     if retval == {}:
-        retval.update({'rdsize':0,'reqs':0,'time':,'url':'none'})
+        retval.update({'rdsize':0,'reqs':0,'time':0,'url':'none'})
     return retval
 
 def gettotaltime(lines):
