@@ -135,8 +135,12 @@ def parse_by_con(testDir,con):
             empty_files.append(len(list_empty))
     for log_path in log_paths:
         host_freq.append(avg_hostfreq(log_path))
+
+    rate = sum(rates)/len(rates)
+    host = sum(host_freq)/len(host_freq)
+    empty = sum(empty_files)/len(empty_files)
     
-    data = [rates, host_freq, empty_files]
+    data = [rate, host, empty]
 
     return data
 
@@ -151,6 +155,9 @@ for con in con_list:
     data_list.append([int(con)] + con_data)
 
 print(data_list)
+
+with open('emptyfiles.txt','w+') as txt:
+    collect_empty_files()
 
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
