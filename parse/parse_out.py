@@ -33,7 +33,7 @@ def xrdfragcp_args(rows): #input must be a list with lines from the output file
         else:
             pass
     if retval == {}:
-        retval.update({'rdsize':'none','reqs':'none','time':'none','url':'none'})
+        retval.update({'rdsize':0,'reqs':0,'time':,'url':'none'})
     return retval
 
 def gettotaltime(lines):
@@ -61,17 +61,16 @@ def parse_out(outfile):
     fl_handle.close()
 
     arguments = xrdfragcp_args(fl_data)
-
-    retval['reqsize'] = int(arguments['rdsize'])/(int(arguments['reqs']) * 1024 * 1024)
     
     if fl_data == []:
         retval['empty']=True
-        retval.update({'url':"none",'reqs':0,'total_time':0})
+        retval.update({'url':"none",'reqs':0,'reqsize':0,'total_time':0})
     else:
         retval['empty']=False
         retval['url'] = arguments['url']
         retval['reqs'] = arguments['reqs']
         retval['total_time'] = gettotaltime(fl_data)
+        retval['reqsize'] = int(arguments['rdsize'])/(int(arguments['reqs']) * 1024 * 1024)
     return retval
 
 def average_rate(dir):
@@ -152,7 +151,6 @@ for con in con_list:
     data_list.append([int(con)] + con_data)
 
 print(data_list)
-
 
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
