@@ -156,9 +156,6 @@ for con in con_list:
 
 print(data_list)
 
-with open('emptyfiles.txt','w+') as txt:
-    collect_empty_files()
-
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['concurrency','rates','hosted','empty'])
