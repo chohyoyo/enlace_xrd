@@ -156,11 +156,12 @@ data_list = []
 for con in con_list:
     con_data = parse_by_con(testDir, con)
     print(con_data)
-    data_list.append([int(con)] + [item[0] for item in con_data])
+    for i in range(0,len(con_data[0])):
+        data_list.append([int(con)] + [i+1] + [item[i] for item in con_data])
 
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['concurrency','rates','hosted','failed'])
+    writer.writerow(['concurrency','run','rates','hosted','failed'])
     for data in data_list:
         writer.writerow(data)
 #%%s
