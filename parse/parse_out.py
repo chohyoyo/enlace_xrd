@@ -14,6 +14,7 @@ def collect_out(condir):
                 retval.append(out_path)
             else:
                 pass
+    print(len(retval))
     return retval
 
 def xrdfragcp_args(rows): #input must be a list with lines from the output file
@@ -98,8 +99,7 @@ def collect_empty_files(runDir):
         else:
             pass
     if empty_out == []:
-        empty_out.append("No empty output files.")
-    print(empty_out)
+        print("No empty output files.")
     return empty_out
 
 def avg_hostfreq(log_path):
@@ -139,9 +139,9 @@ def parse_by_con(testDir,con):
     for log_path in log_paths:
         host_freq.append(avg_hostfreq(log_path))
 
-    rate = sum(rates)/len(rates)
-    host = sum(host_freq)/len(host_freq)
-    empty = sum(empty_files)
+    #rate = sum(rates)/len(rates)
+    #host = sum(host_freq)/len(host_freq)
+    #empty = sum(empty_files)
     
     data = [rates, host_freq, empty_files]
 
@@ -155,9 +155,8 @@ data_list = []
 
 for con in con_list:
     con_data = parse_by_con(testDir, con)
-    data_list.append([int(con)] + con_data)
-
-print(data_list)
+    print(con_data)
+    data_list.append([int(con)] + [item[0] for item in con_data])
 
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
