@@ -120,8 +120,8 @@ def parse_by_con(testDir,con):
     path = testDir
     x = str(con)
 
-    log_paths = glob.glob(path+"con_"+x+"_*.log",recursive=True)
-    con_dirs = glob.glob(path+"concurrency_"+x+"_*/",recursive=True)
+    log_paths = glob.glob(path+"con_"+x+"_*.log")
+    con_dirs = glob.glob(path+"concurrency_"+x+"_*/")
     
     rates = []
     host_freq = []
