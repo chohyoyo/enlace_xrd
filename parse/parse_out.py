@@ -99,6 +99,8 @@ def collect_empty_files(runDir):
             pass
     if empty_out == []:
         empty_out.append("No empty output files.")
+    print(empty_out)
+    return empty_out
 
 def avg_hostfreq(log_path):
     parseddata = cp.parse_job_data(log_path)
@@ -118,18 +120,19 @@ def parse_by_con(testDir,con):
     path = testDir
     x = str(con)
 
-    log_paths = glob.glob(path+"con_"+x+"_*.log")
-    con_dirs = glob.glob(path+"concurrency_"+x+"_*/")
+    log_paths = glob.glob(path+"con_"+x+"_*.log",recursive=True)
+    con_dirs = glob.glob(path+"concurrency_"+x+"_*/",recursive=True)
     
-    #averages
     rates = []
     host_freq = []
     empty_files = []
 
     for dir in con_dirs:
-        rates.append(average_rate(dir))
+        avg_rate = average_rate(dir)
+        rates.append(avg_rate)
         list_empty = collect_empty_files(dir)
-        if list_empty is None:
+        if list_empty == []:
+            print("empty list")
             empty_files.append(0)
         else:
             empty_files.append(len(list_empty))
@@ -138,7 +141,7 @@ def parse_by_con(testDir,con):
 
     rate = sum(rates)/len(rates)
     host = sum(host_freq)/len(host_freq)
-    empty = sum(empty_files)/len(empty_files)
+    empty = sum(empty_files)
     
     data = [rate, host, empty]
 
@@ -158,7 +161,7 @@ print(data_list)
 
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['concurrency','rates','hosted','empty'])
+    writer.writerow(['concurrency','rates','hosted','failed'])
     for data in data_list:
         writer.writerow(data)
 #%%s
