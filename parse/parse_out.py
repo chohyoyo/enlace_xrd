@@ -143,7 +143,7 @@ def parse_by_con(testDir,con):
     host = sum(host_freq)/len(host_freq)
     empty = sum(empty_files)
     
-    data = [rate, host, empty]
+    data = [rates, host_freq, empty_files]
 
     return data
 
