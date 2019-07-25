@@ -74,7 +74,7 @@ def parse_out(outfile):
         retval['reqsize'] = int(arguments['rdsize'])/(int(arguments['reqs']) * 1024 * 1024)
     return retval
 
-def average_rate(dir):
+def average_rate(dir): #of a single run of a single concurrency
     retval = []
     paths = collect_out(dir)
     for path in paths:
@@ -123,7 +123,7 @@ def parse_by_con(testDir,con):
     log_paths = glob.glob(path+"con_"+x+"_*.log")
     con_dirs = glob.glob(path+"concurrency_"+x+"_*/")
     
-    rates = []
+    rates = [] 
     host_freq = []
     empty_files = []
 
@@ -138,10 +138,6 @@ def parse_by_con(testDir,con):
             empty_files.append(len(list_empty))
     for log_path in log_paths:
         host_freq.append(avg_hostfreq(log_path))
-
-    #rate = sum(rates)/len(rates)
-    #host = sum(host_freq)/len(host_freq)
-    #empty = sum(empty_files)
     
     data = [rates, host_freq, empty_files]
 
