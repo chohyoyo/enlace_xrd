@@ -62,14 +62,15 @@ def parse_out(outfile):
     fl_handle.close()
 
     arguments = xrdfragcp_args(fl_data)
-    
+
     if fl_data == []:
         retval['empty']=True
-        retval.update({'url':"none",'reqs':0,'reqsize':0,'total_time':0})
+        retval.update({'url':"none",'reqs':0,'reqsize':0,'total_time':0,'expected time': 0})
     else:
         retval['empty']=False
         retval['url'] = arguments['url']
         retval['reqs'] = arguments['reqs']
+        retval['expected time'] = arguments['time']
         retval['total_time'] = gettotaltime(fl_data)
         retval['reqsize'] = int(arguments['rdsize'])/(int(arguments['reqs']) * 1024 * 1024)
     return retval
@@ -90,8 +91,25 @@ def average_rate(dir): #of a single run of a single concurrency
     average = sum(retval)/len(retval)
     return average
 
-def collect_empty_files(runDir):
-    paths = collect_out(runDir)
+def expected_rate(dir): #of a single run of a single concurrency
+    retval = []
+    paths = collect_out(dir)
+    for path in paths:
+        reqs = int(parse_out(path)['reqs'])
+        reqsize = parse_out(path)['reqsize']
+        tot_size = float(reqsize*reqs)
+        exp_time = float(parse_out(path)['expected time'])
+        if exp_time != 0:
+            exp_rate = tot_size/exp_time
+            retval.append(exp_rate)
+        else:
+            pass
+    average = sum(retval)/len(retval)
+    print(average)
+    return average
+
+def collect_empty_files(conDir):
+    paths = collect_out(conDir)
     empty_out = []
     for path in paths:
         if parse_out(path)['empty'] == True:
@@ -124,12 +142,15 @@ def parse_by_con(testDir,con):
     con_dirs = glob.glob(path+"concurrency_"+x+"_*/")
     
     rates = [] 
+    exp_rates = []
     host_freq = []
     empty_files = []
 
     for dir in con_dirs:
         avg_rate = average_rate(dir)
         rates.append(avg_rate)
+        exp_rate = expected_rate(dir)
+        exp_rates.append(exp_rate)
         list_empty = collect_empty_files(dir)
         if list_empty == []:
             print("empty list")
@@ -139,7 +160,7 @@ def parse_by_con(testDir,con):
     for log_path in log_paths:
         host_freq.append(avg_hostfreq(log_path))
     
-    data = [rates, host_freq, empty_files]
+    data = [rates, exp_rates, host_freq, empty_files]
 
     return data
 
@@ -157,7 +178,7 @@ for con in con_list:
 
 with open('parsed.csv','w+') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['concurrency','run','rates','hosted','failed'])
+    writer.writerow(['concurrency','run','rates','exp rates','hosted','failed'])
     for data in data_list:
         writer.writerow(data)
 #%%s
