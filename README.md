@@ -10,7 +10,7 @@ All tests were run using glideTester and executables were set from glideTester's
 First, chmod frag-some.py to make it executable and set its path as the executable value in the parameters file.
 frag-some.py takes in six arguments. The first is the path to the input file 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, and number of requests** in that order.
 
-Offset refers to the block offset 
+Offset refers to the block offset in the fragment to be retrieved (default value is 0). ID is the job ID (usually $PROCID). Count is the number of times the fragment will be downloaded, and requests is the total number of requests to be made by a single job.
 
 
 ### Parsing Standard Output
