@@ -1,13 +1,17 @@
 # enlace_xrd
 
 ### Introduction
-The primary aim of this project is to conduct scale tests on the XRootD cache system using glideTester. This repository contains the executable file needed to execute xrdfragcp and the code necessary to parse the standard output from the tests. GlideTester itself and xrdfragcp however are not included and may need to be found elsewhere.
+The primary aim of this project is to conduct scale tests on the XRootD cache system using glideTester. This repository contains the executable file needed to execute xrdfragcp and the code necessary to parse the standard output from the tests. However, the glideTester and xrdfragcp files themselves are not included.
 
 ### Running the Test
 
-All tests were run using glideTester and executables were set from glideTester's parameters file.
+All tests were run using glideTester and formatted from glideTester's parameters file.
 
-First, chmod frag-some.py to make it executable and set its path as the executable value in the parameters file.
+First, make frag-some.py executable with the command
+
+```
+chmod 777 frag-some.py
+```
 frag-some.py takes in six arguments. The first is the path to the input file 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
 
 *Offset refers to the block offset in the fragment to be retrieved (default value is 0). 
@@ -15,14 +19,26 @@ frag-some.py takes in six arguments. The first is the path to the input file 'al
 *Count is the number of times the fragment will be downloaded
 *requests is the total number of requests to be made by a single job.
 
-For example, one might enter in glideTester's parameters:
+Xrdfragcp must be run from within a singularity image whose link is printed below.
+
+To start a run using xrdfragcp, set the path to frag-some.py as the value for glideTester's parameters and pass the appropriate arguments. For instance:
 
 ```
+executable=frag-some.py
 arguments= ./input_files/all-files-ge-128M.txt 0 $(Process) 1 10 10
++SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest"
 
 ```
-This will start xrdfragcp with no offset, download each file once, make 10 requests per job, and download at a rate of 10MB/10s (that is, 1MB/s).
+In this example, xrdfragcp will run with no offset, download each file once, make 10 requests per job, and download at a rate of 10MB/10s (that is, 1MB/s).
 
+In the optional condor parameters, one must also transfer all input files. This includes frag-some.py, the input files folder included in the repository, and the compiled xrdfragcp executable.
+
+```
+transfer_input_files=./frag-some.py,/opt/xrdfragcp,./UCSD-Tests/UCSD_Host-UCSD_Cache/input_files/
+
+```
+
+Set the appropriate concurrencies and run number, and run with the command 
 
 ### Parsing Standard Output
 
