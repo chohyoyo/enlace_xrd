@@ -45,4 +45,9 @@ The script then writes a csv file containing information on the average rate, av
 
 AveragePlots.py can be used to then generate plots from the csv file. Running the python script with the csv file path passed as the first argument will generate and save .png files of plots for the **average rate per concurrency, average number of jobs per host for each concurrency,** and the **total number of failed jobs for all runs of a given concurrency**. It also generates plots for the percent rate of achieved rate vs the expected rate.
 
+```
+python parse/AveragePlots.py ~/enlace/parsed.csv
+```
+
+
 AveragePlots.py will need the matplotlib and pandas libraries. If these libraries are not present, the csv file can be copied to another server that has the necessary packages installed.
