@@ -43,7 +43,12 @@ The script will os.walk through the directory looking for all immediate subdirec
 
 The script then writes a csv file containing information on the average rate, average number of jobs sent to each slot host, and the total number of failed jobs for each run of a given concurrency. It collects this information from both the standard output files of each job and also from the condor log files generated for each run.
 
-AveragePlots.py can be used to then generate plots from the csv file. Running the python script with the csv file path passed as the first argument will generate and save .png files of plots for the **average rate per concurrency, average number of jobs per host for each concurrency,** and the **total number of failed jobs for all runs of a given concurrency**. It also generates plots for the percent rate of achieved rate vs the expected rate.
+AveragePlots.py can be used to then generate plots from the csv file. Running the python script with the csv file path passed as the first argument will generate and save .png images of the following plots:
+
+* Average Rates per Concurrency
+* Percent of Expected Rate Achieved per Concurrency
+* Total Number of Failed Jobs per Concurrency (only if there were some jobs that failed. Otherwise, it just prints "No failed jobs")
+* Average Number of Jobs Hosted per Host for concurrency
 
 ```
 python parse/AveragePlots.py ~/enlace/parsed.csv
