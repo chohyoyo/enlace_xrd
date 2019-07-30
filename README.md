@@ -39,7 +39,7 @@ Collecting data from a run directory can be done with parse_out.py. To use this 
 python parse/parse_out.py ~/enlace/run_20190719_144618/ 100 300 500  
 ```
 
-The script will os.walk through the directory looking for all immediate subdirectories with the name 'con_[concurrency]_run_[run number].log'. 
+The script will os.walk through the directory looking for all immediate subdirectories with the name 'con _ [concurrency]_ run _ [run number].log'. 
 
 The script then writes a csv file containing information on the average rate, average number of jobs sent to each slot host, and the total number of failed jobs for each run of a given concurrency. It collects this information from both the standard output files of each job and also from the condor log files generated for each run.
 
