@@ -35,6 +35,8 @@ transfer_input_files=./frag-some.py,/opt/xrdfragcp,./UCSD-Tests/UCSD_Host-UCSD_C
 
 ### Parsing Standard Output
 
+AveragePlots.py will need the matplotlib and pandas libraries. If these libraries are not present, the csv file can be copied to another server that has the necessary packages installed.
+
 Collecting data from a run directory can be done with parse_out.py. To use this file, execute it as a python script with the run directory's path as the first argument followed by the concurrencies you would like it to collect data for. For example:
 
 ```
@@ -57,4 +59,4 @@ python parse/AveragePlots.py ~/enlace/parsed.csv
 ```
 
 
-AveragePlots.py will need the matplotlib and pandas libraries. If these libraries are not present, the csv file can be copied to another server that has the necessary packages installed.
+
