@@ -1,9 +1,8 @@
-{::options parse_block_html="true" /}
-
 # enlace_xrd
 
 ### Introduction
-The primary aim of this project is to conduct scale tests on the XRootD cache system using GlideTester. This repository contains the executable file needed to run xrdfragcp and the code necessary to parse the standard output from the tests. The GlideTester and xrdfragcp files themselves, however, are not included.
+The primary aim of this project is to conduct scale tests on the XRootD cache system using [GlideTester](https://github.com/ischeinkman/osgscal/tree/master/glideTester/doc).
+This repository contains the executable file needed to run xrdfragcp and the code necessary to parse the standard output from the tests. The GlideTester and xrdfragcp files themselves, however, are not included.
 
 ### Running the Test
 
