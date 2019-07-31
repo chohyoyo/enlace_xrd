@@ -5,7 +5,7 @@ The primary aim of this project is to conduct scale tests on the XRootD cache sy
 
 ### Running the Test
 
-Jobs (fake clients) were submitted using glideTester to make requests for data at the same time from the XRootD cach. This was done using two main programs. The first, xrdfragcp, simulates actual client use by requesting to copy fragments of data from a given XRootD file URL. The second, frag-some.py, is a script that feeds a command to run xrdfragcp with a given data fragment size, offset (of where the first downloaded block will start), download rate, and number of requests. It also ensures that the same file is not chosen by two clients by matching the jobID to a file in a list of file URLs.
+GlideTester is used to simulate simualtaneous data requests from multiple clients to the XRootD cache. This was done using two main scripts. The first, xrdfragcp, simulates individual client use by making requests to copy fragments of data from a given XRootD file URL. The second, frag-some.py, is a script that feeds a command to xrdfragcp with the appropriate arguments. This includes data fragment size, offset (of where the first downloaded block will start), download rate, and number of requests. It also ensures that the same file is not chosen by two clients by matching the jobID to a file in a list of file URLs.
 
 Since frag-some.py already includes the command to call xrdfragcp, one only needs to run frag-some.py as the executable to be submitted by glideTester. To do so, first change the scripts permissions using the following command.
 
@@ -15,7 +15,7 @@ chmod 777 frag-some.py
 
 In glideTester's parameters.cfg file, set the path to frag-some.py as the executable value.
 
-frag-some.py takes in six arguments. The first is the path to the input file 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
+frag-some.py takes in six arguments. The first is the **path to the input file** 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
 
 ```
 executable=frag-some.py
