@@ -1,3 +1,5 @@
+{::options parse_block_html="true" /}
+
 # enlace_xrd
 
 ### Introduction
