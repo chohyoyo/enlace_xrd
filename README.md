@@ -36,9 +36,6 @@ transfer_input_files=./frag-some.py,/opt/xrdfragcp,./UCSD-Tests/UCSD_Host-UCSD_C
 
 ### Parsing Standard Output
 
-AveragePlots.py will need the matplotlib and pandas libraries. If these libraries are not present, the csv file should be copied and plots should be generated on another server that has the necessary packages installed.
-{: .alert .alert-warning}
-
 Collecting data from a run directory can be done with parse_out.py. To use this file, execute it as a python script with the run directory's path as the first argument followed by the concurrencies you would like it to collect data for. For example:
 
 ```
@@ -49,7 +46,9 @@ The script will os.walk through the directory looking for all immediate subdirec
 
 The script then writes a csv file containing information on the average rate, average number of jobs sent to each slot host, and the total number of failed jobs for each run of a given concurrency. It collects this information from both the standard output files of each job and also from the condor log files generated for each run.
 
-AveragePlots.py can be used to then generate plots from the csv file. Running the python script with the csv file path passed as the first argument will generate and save .png images of the following plots:
+generate_plots.py will need the matplotlib and pandas libraries. If these libraries are not present, the csv file should be copied and plots should be generated on another server that has the necessary packages installed.
+
+generate_plots.py can be used to then generate plots from the csv file. Running the python script with the csv file path passed as the first argument will generate and save .png images of the following plots:
 
 * Average Rates per Concurrency
 * Percent of Expected Rate Achieved per Concurrency
