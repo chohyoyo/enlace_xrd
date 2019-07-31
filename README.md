@@ -1,19 +1,21 @@
 # enlace_xrd
 
 ### Introduction
-The primary aim of this project is to conduct scale tests on the XRootD cache system using glideTester. This repository contains the executable file needed to execute xrdfragcp and the code necessary to parse the standard output from the tests. However, the glideTester and xrdfragcp files themselves are not included.
+The primary aim of this project is to conduct scale tests on the XRootD cache system using glideTester. This repository contains the executable file needed to run xrdfragcp and the code necessary to parse the standard output from the tests. The glideTester and xrdfragcp files themselves, however, are not included.
 
 ### Running the Test
 
-The test is run from glideTester by executing xrdfragcp from a python script that tells xrdfragcp how much data and which file to copy. To use frag-some.py, first, make frag-some.py executable with the command
+Jobs (fake clients) were submitted using glideTester to make requests for data at the same time from the XRootD cach. This was done using two main programs. The first, xrdfragcp, simulates actual client use by requesting to copy fragments of data from a given XRootD file URL. The second, frag-some.py, is a script that feeds a command to run xrdfragcp with a given data fragment size, offset (of where the first downloaded block will start), download rate, and number of requests. It also ensures that the same file is not chosen by two clients by matching the jobID to a file in a list of file URLs.
+
+Since frag-some.py already includes the command to call xrdfragcp, one only needs to run frag-some.py as the executable to be submitted by glideTester. To do so, first change the scripts permissions using the following command.
 
 ```
 chmod 777 frag-some.py
 ```
 
-frag-some.py takes in six arguments. The first is the path to the input file 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
+In glideTester's parameters.cfg file, set the path to frag-some.py as the executable value.
 
-To start a run using xrdfragcp, set the path to frag-some.py as the value for glideTester's parameters and pass the appropriate arguments. For instance:
+frag-some.py takes in six arguments. The first is the path to the input file 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
 
 ```
 executable=frag-some.py
