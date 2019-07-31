@@ -14,7 +14,7 @@ print(df)
 #%%
 #Bar Graph of Actual/Expected Rates of Varying Concurrencies
 
-fig1, ax1 = plt.subplots(figsize = (6,6))
+fig1, ax1 = plt.subplots(figsize = (12,12))
 
 width=50
 df = df.reset_index()
@@ -48,7 +48,7 @@ print("Saved plot for rate comparisons")
 #%%
 #Plot for percent of expected rate achieved
 
-fig2, ax2 = plt.subplots(figsize = (6,6))
+fig2, ax2 = plt.subplots(figsize = (12,12))
 
 percent_rate = [(rate/exp)*100 for rate,exp in zip(rates_in_Mbps,exp_rates)]
 
@@ -70,7 +70,7 @@ print("Saved plot for percent of expected rate achieved.")
 #%%
 #Plot for the number of failed jobs
 
-fig3, ax3 = plt.subplots(figsize = (6,6))
+fig3, ax3 = plt.subplots(figsize = (12,12))
 
 width=50
 
@@ -101,7 +101,7 @@ print("Saved plot for number of jobs failed.")
 #%%
 #Plot for the average number of jobs hosted by a slot
 
-fig4, ax4 = plt.subplots(figsize=(6,6))
+fig4, ax4 = plt.subplots(figsize=(12,12))
 
 width=50
 
