@@ -14,7 +14,7 @@ print(df)
 #%%
 #Bar Graph of Actual/Expected Rates of Varying Concurrencies
 
-fig1, ax1 = plt.subplots()
+fig1, ax1 = plt.subplots(figsize = (6,6))
 
 width=50
 df = df.reset_index()
@@ -43,14 +43,12 @@ plt.grid(b=True,which='minor',color='#999999',linestyle='-',alpha=0.2)
 #ax1.tick_params(labelbottom = False)
 ax1.legend(loc="lower right")
 
-plt.text(0.25,0,'Average of 4 runs at a rate of ' + str(exp_rate*8) + 'Mbps',fontsize = 11, transform=plt.gcf().transFigure)
-
-plt.savefig("comparison.png")
+plt.savefig("comparison.png",transparent=True)
 print("Saved plot for rate comparisons")
 #%%
 #Plot for percent of expected rate achieved
 
-fig2, ax2 = plt.subplots()
+fig2, ax2 = plt.subplots(figsize = (6,6))
 
 percent_rate = [(rate/exp)*100 for rate,exp in zip(rates_in_Mbps,exp_rates)]
 
@@ -66,15 +64,13 @@ ax2.set_xticklabels(x)
 for a,b in zip(x,percent_rate):
        plt.text(a,b+1,str(round(b,2)))
 
-plt.text(0.25,0,'Average of 4 runs at a rate of ' + str(exp_rate*8) + 'Mbps',fontsize = 11, transform=plt.gcf().transFigure)
-
-plt.savefig("percent_achieved.png")
+plt.savefig("percent_achieved.png", transparent=True)
 print("Saved plot for percent of expected rate achieved.")
 
 #%%
 #Plot for the number of failed jobs
 
-fig3, ax3 = plt.subplots()
+fig3, ax3 = plt.subplots(figsize = (6,6))
 
 width=50
 
@@ -84,12 +80,13 @@ print(list_empty)
 
 if sum(list_empty) == 0:
        print("No failed jobs")
+       ax3.set_title("No failed jobs")
 else:
        emptybar = ax3.bar(x, list_empty, width,label="Failed Jobs")
        
        ax3.set_xlabel('Concurrency')
        ax3.set_ylabel('Number Failed')
-       ax3.set_title('Average Number of Failed Jobs\n')
+       ax3.set_title('Total Number of Failed Jobs\n')
        ax3.set_xticks(x)
        ax3.set_xticklabels(x)
        #ax1.tick_params(labelbottom = False)
@@ -98,14 +95,13 @@ else:
        for a,b in zip(x,empty):
               plt.text(a,b,str(round(b,2)))
               
-       plt.text(0.2,0.1,'Average of 4 runs at a rate of ' + str(exp_rate*8) + 'Mbps',fontsize = 11, transform=plt.gcf().transFigure)
-       
-       plt.savefig("Average_Number_of_Failed_Jobs.png")
-       print("Saved plot for number of jobs failed.")
+
+plt.savefig("Average_Number_of_Failed_Jobs.png", transparent = True)
+print("Saved plot for number of jobs failed.")
 #%%
 #Plot for the average number of jobs hosted by a slot
 
-fig4, ax4 = plt.subplots()
+fig4, ax4 = plt.subplots(figsize=(6,6))
 
 width=50
 
@@ -120,9 +116,7 @@ ax4.set_xticks(x)
 ax4.set_xticklabels(x)
 ax4.legend()
 
-plt.text(0.2,0,'Average of 4 runs at a rate of ' + str(exp_rate*8) + 'Mbps',fontsize = 11, transform=plt.gcf().transFigure)
-
-plt.savefig("Avg_Number_Hosted_Jobs.png")
+plt.savefig("Avg_Number_Hosted_Jobs.png",transparent=True)
 
 print("Saved plot for average number of jobs hosted.")
 #%%
