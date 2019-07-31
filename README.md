@@ -1,7 +1,7 @@
 # enlace_xrd
 
 ### Introduction
-The primary aim of this project is to conduct scale tests on the XRootD cache system using glideTester. This repository contains the executable file needed to run xrdfragcp and the code necessary to parse the standard output from the tests. The glideTester and xrdfragcp files themselves, however, are not included.
+The primary aim of this project is to conduct scale tests on the XRootD cache system using GlideTester. This repository contains the executable file needed to run xrdfragcp and the code necessary to parse the standard output from the tests. The GlideTester and xrdfragcp files themselves, however, are not included.
 
 ### Running the Test
 
@@ -10,10 +10,10 @@ GlideTester is used to simulate simualtaneous data requests from multiple client
 Since frag-some.py already includes the command to call xrdfragcp, one only needs to run frag-some.py as the executable to be submitted by glideTester. To do so, first change the scripts permissions using the following command.
 
 ```
-chmod 777 frag-some.py
+chmod +X frag-some.py
 ```
 
-In glideTester's parameters.cfg file, set the path to frag-some.py as the executable value.
+In glideTester's parameters.cfg file, set frag-some.py as the executable value (or if frag-some.py .
 
 frag-some.py takes in six arguments. The first is the **path to the input file** 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
 
