@@ -2,7 +2,7 @@
 
 ### Introduction
 The primary aim of this project is to conduct scale tests on the XRootD cache system using [GlideTester](https://github.com/ischeinkman/osgscal/tree/master/glideTester/doc).
-This repository contains the executable file needed to run xrdfragcp and the code necessary to parse the standard output from the tests. The GlideTester and xrdfragcp files themselves, however, are not included.
+This repository contains the executable file needed to run [xrdfragcp](https://github.com/osschar/xrdfragcp) and the code necessary to parse the standard output from the tests. GlideTester and xrdfragcp files themselves, however, are not included.
 
 ### Running the Test
 
@@ -14,7 +14,7 @@ Since frag-some.py already includes the command to call xrdfragcp, one only need
 chmod +X frag-some.py
 ```
 
-In glideTester's parameters.cfg file, set frag-some.py as the executable value (or if frag-some.py .
+In glideTester's parameters.cfg file, set frag-some.py as the executable value (if frag-some.py is in another folder, enter the full path to the script).
 
 frag-some.py takes in six arguments. The first is the **path to the input file** 'all-files-ge-128.txt'. This is a list of 25995 lines file URLs that can be copied from. This is followed by the **offset, id, count, number of requests, and download rate in MB/10s** in that order.
 
@@ -53,12 +53,10 @@ AveragePlots.py can be used to then generate plots from the csv file. Running th
 
 * Average Rates per Concurrency
 * Percent of Expected Rate Achieved per Concurrency
-* Total Number of Failed Jobs per Concurrency (only if there were some jobs that failed. Otherwise, it just prints "No failed jobs")
+* Total Number of Failed Jobs per Concurrency
 * Average Number of Jobs Hosted per Host for concurrency
 
 ```
 python parse/AveragePlots.py ~/enlace/parsed.csv
 ```
-
-
 
