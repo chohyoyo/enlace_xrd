@@ -14,7 +14,7 @@ print(df)
 #%%
 #Bar Graph of Actual/Expected Rates of Varying Concurrencies
 
-fig1, ax1 = plt.subplots(figsize = (12,12))
+fig1, ax1 = plt.subplots(figsize = (6,6))
 
 width=50
 df = df.reset_index()
@@ -43,12 +43,12 @@ plt.grid(b=True,which='minor',color='#999999',linestyle='-',alpha=0.2)
 #ax1.tick_params(labelbottom = False)
 ax1.legend(loc="lower right")
 
-plt.savefig("comparison.png",transparent=True)
+plt.savefig("comparison.png",transparent=True,dpi = 300)
 print("Saved plot for rate comparisons")
 #%%
 #Plot for percent of expected rate achieved
 
-fig2, ax2 = plt.subplots(figsize = (12,12))
+fig2, ax2 = plt.subplots(figsize = (6,6))
 
 percent_rate = [(rate/exp)*100 for rate,exp in zip(rates_in_Mbps,exp_rates)]
 
@@ -64,13 +64,13 @@ ax2.set_xticklabels(x)
 for a,b in zip(x,percent_rate):
        plt.text(a,b+1,str(round(b,2)))
 
-plt.savefig("percent_achieved.png", transparent=True)
+plt.savefig("percent_achieved.png", transparent=True, dpi=300)
 print("Saved plot for percent of expected rate achieved.")
 
 #%%
 #Plot for the number of failed jobs
 
-fig3, ax3 = plt.subplots(figsize = (12,12))
+fig3, ax3 = plt.subplots(figsize = (6,6))
 
 width=50
 
@@ -96,12 +96,12 @@ else:
               plt.text(a,b,str(round(b,2)))
               
 
-plt.savefig("Average_Number_of_Failed_Jobs.png", transparent = True)
+plt.savefig("Average_Number_of_Failed_Jobs.png", transparent = True,dpi=300)
 print("Saved plot for number of jobs failed.")
 #%%
 #Plot for the average number of jobs hosted by a slot
 
-fig4, ax4 = plt.subplots(figsize=(12,12))
+fig4, ax4 = plt.subplots(figsize=(6,6))
 
 width=50
 
@@ -116,7 +116,7 @@ ax4.set_xticks(x)
 ax4.set_xticklabels(x)
 ax4.legend()
 
-plt.savefig("Avg_Number_Hosted_Jobs.png",transparent=True)
+plt.savefig("Avg_Number_Hosted_Jobs.png",transparent=True,dpi=300)
 
 print("Saved plot for average number of jobs hosted.")
 #%%
